@@ -1,0 +1,151 @@
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #101827;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #94a3b8;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.mode {
+  display: flex;
+  gap: 10px;
+  margin: 40px 0;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.timer {
+  font-size: 90px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  font-variant-numeric: tabular-nums;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+}
+
+.mode button {
+  background-color: #263449;
+  color: #94a3b8;
+}
+
+.mode button.active {
+  background-color: #06b6d4;
+  color: white;
+}
+
+.time-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.time-input input {
+  width: 75px;
+  padding: 10px;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  background-color: #263449;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+}
+
+.time-input input:disabled {
+  opacity: 0.5;
+}
+
+.controls button {
+  background-color: #06b6d4;
+  color: white;
+}
+
+.controls button:hover {
+  opacity: 0.8;
+}
+
+.alarm-message {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #06b6d4;
+  border-radius: 12px;
+  background-color: #263449;
+  text-align: center;
+  color: white;
+  animation: blink 1s infinite alternate;
+}
+
+.alarm-message p {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.alarm-message button {
+  background-color: #ef4444;
+  color: white;
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.65;
+  }
+}
+
+/* 전체 화면 버튼 */
+.fullscreen-button {
+  margin-top: 20px;
+  background-color: #475569;
+  color: white;
+}
+
+/* 전체 화면일 때 */
+.fullscreen-timer {
+  font-size: clamp(120px, 25vw, 400px);
+  margin-bottom: 60px;
+  color: #67e8f9;
+  font-weight: bold;
+}
+
+/* 전체 화면 모드의 배경 */
+body:fullscreen {
+  background-color: #101827;
+}
+
+body:fullscreen .container {
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+}
