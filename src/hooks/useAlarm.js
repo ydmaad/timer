@@ -2,27 +2,7 @@ import { useEffect, useRef, useCallback } from 'react';
 
 function useAlarm(isAlarm) {
   const audioContextRef = useRef(null);
-
-  // 일반 종료 알람
-  const playAlarm = useCallback(() => {
-    const audioContext = audioContextRef.current;
-
-    if (!audioContext) return;
-
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-
-    oscillator.type = 'sine';
-    oscillator.frequency.value = 880;
-
-    gainNode.gain.value = 0.2;
-
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + 0.3);
-  }, []);
+  const hasPlayedAlarm = useRef(false);
 
   // 1분 전 은색 종소리
   const playOneMinuteBell = useCallback(() => {
@@ -54,17 +34,17 @@ function useAlarm(isAlarm) {
     });
   });
 
-  // 알람 반복 실행
+  // 일반 종료 알람
+  const playAlarm = useCallback(() => {
+    playOneMinuteBell();
+  }, [playOneMinuteBell]);
+
+  // 일반 종료 알람 한 번만 재생
   useEffect(() => {
-    if (!isAlarm) return;
+    if (!isAlarm || hasPlayedAlarm.current) return;
 
+    hasPlayedAlarm.current = true;
     playAlarm();
-
-    const alarm = setInterval(() => {
-      playAlarm();
-    }, 1000);
-
-    return () => clearInterval(alarm);
   }, [isAlarm, playAlarm]);
 
   // AudioContext 준비
