@@ -41,7 +41,14 @@ function useAlarm(isAlarm) {
 
   // 일반 종료 알람 한 번만 재생
   useEffect(() => {
-    if (!isAlarm || hasPlayedAlarm.current) return;
+    // 알람 상태가 해제되면 재생 여부 초기화
+    if (!isAlarm) {
+      hasPlayedAlarm.current = false;
+      return;
+    }
+
+    // 이미 재생했다면 중복 재생 방지
+    if (hasPlayedAlarm.current) return;
 
     hasPlayedAlarm.current = true;
     playAlarm();
