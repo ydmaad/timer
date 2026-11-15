@@ -25,12 +25,15 @@ function useTimer({ mode, initialTime, setIsAlarm, playOneMinuteBell }) {
           playOneMinuteBell();
         }
 
-        // 목표 시간 도달 시 알람
-        if (time < initialTime && time + 1 >= initialTime) {
+        // 목표 시간 도달 시 타이머 정지 및 알람
+        if (time + 1 >= initialTime) {
+          setTime(initialTime);
+          setIsRunning(false);
           setIsAlarm(true);
+          return;
         }
 
-        // 목표 시간 이후에도 계속 증가
+        // 목표 시간에 도달하지 않았다면 계속 증가
         setTime((prevTime) => prevTime + 1);
       } else {
         // 카운트다운: 1분 남았을 때 종소리
