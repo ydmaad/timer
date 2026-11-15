@@ -25,12 +25,9 @@ function useTimer({ mode, initialTime, setIsAlarm, playOneMinuteBell }) {
           playOneMinuteBell();
         }
 
-        // 목표 시간 도달 시 타이머 정지 및 알람
-        if (time + 1 >= initialTime) {
-          setTime(initialTime);
-          setIsRunning(false);
+        // 목표 시간 도달 시 알람
+        if (time + 1 === initialTime) {
           setIsAlarm(true);
-          return;
         }
 
         // 목표 시간에 도달하지 않았다면 계속 증가
